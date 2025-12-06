@@ -1,6 +1,6 @@
 ## 🌐 Project Name: Vehicle Rent
 
-## 🌐 Live URL: [https://your-deployment-url.com](https://your-deployment-url.com)
+## 🌐 Live URL: [https://vehicle-rent-seven.vercel.app/](https://vehicle-rent-seven.vercel.app/)
 
 **GitHub Repository:** [https://github.com/mozammal01/vehicle-rent](https://github.com/mozammal01/vehicle-rent)
 
@@ -94,7 +94,7 @@ The server will start at `http://localhost:${PORT}`
 
 ## GitHub Repo : [https://github.com/mozammal01/vehicle-rent](https://github.com/mozammal01/vehicle-rent)
 
-# Live URL : [https://your-deployment-url.com](https://your-deployment-url.com)
+# Live URL : [https://vehicle-rent-seven.vercel.app/](https://vehicle-rent-seven.vercel.app/)
 
 ---
 
