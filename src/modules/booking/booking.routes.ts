@@ -8,6 +8,6 @@ router.post("/", auth("admin", "customer"), bookingController.createBooking);
 
 router.get("/", auth("admin", "customer"), bookingController.getBooking);
 
-router.put("/:id", auth("admin", "customer"), bookingController.updateBooking);
+router.put("/:bookingId", auth("admin", "customer"), bookingController.updateBooking);
 
 export const bookingRoutes = router;

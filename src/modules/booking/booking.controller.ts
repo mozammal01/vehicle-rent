@@ -44,7 +44,7 @@ const updateBooking = async (req: Request, res: Response) => {
   const {role, email} = (req as any).user;
 
   try {
-    const result = await bookingServices.updateBooking(status, req.params.id as string, role, email);
+    const result = await bookingServices.updateBooking(status, req.params.bookingId as string, role, email);
 
     if (!result) {
       res.status(404).json({
