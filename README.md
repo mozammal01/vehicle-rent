@@ -1,16 +1,16 @@
-## 🌐 Project Name: Vehicle Rent
+# 🌐 Project Name: Vehicle Rent
 
-## 🌐 Live URL: [https://vehicle-rent-seven.vercel.app/](https://vehicle-rent-seven.vercel.app/)
+# 🌐 Live URL: [https://vehicle-rent-seven.vercel.app/](https://vehicle-rent-seven.vercel.app/)
 
 **GitHub Repository:** [https://github.com/mozammal01/vehicle-rent](https://github.com/mozammal01/vehicle-rent)
 
 ---
 
-## ✨ Features
+# ✨ Features
 
-# Authentication & Authorization
+## Authentication & Authorization
 
-# User Management
+## User Management
 - **User Registration** - Sign up with role-based 
 - **User Login** - Using JWT authentication with 7-day token expiry
 - **Role-Based Access Control** - Secure endpoints based on user roles (Admin/Customer)
@@ -21,7 +21,7 @@
 - **Update User Profile** - Admin can update any user, Customers can update their own profile
 - **Delete User** - Admin can delete any user (with active booking protection)
 
-# Vehicle Management
+## Vehicle Management
 
 - **Add Vehicles** - Only Admin can add vehicles (car, bike, van, suv)
 - **View All Vehicles** - Anyone can view all vehicles
@@ -29,7 +29,7 @@
 - **Update Vehicle** - Only Admin can update a vehicle
 - **Delete Vehicle** - Only Admin can delete a vehicle
 
-# Booking Management
+## Booking Management
 
 - **Create Booking** - Anyone can create a booking (auto-calculates total price)
 - **View Bookings** - Admin can view all bookings, Customers can view their own bookings
@@ -37,9 +37,7 @@
 
 ---
 
-## 🛠️ Technology Stack
-
- Technology        
+# 🛠️ Technology Stack  
  ----------------- 
  **Node.js**        
  **Express.js v5**           
@@ -51,28 +49,28 @@
 
 ---
 
-## 📦 Installation & Setup
+# 📦 Installation & Setup
 
-# Prerequisites
+## Prerequisites
 
 - Node.js (v18 or higher)
 - PostgreSQL database
 - npm
 
-# 1. Clone the Repository
+## 1. Clone the Repository
 
 ```bash
 git clone https://github.com/mozammal01/vehicle-rent.git
 cd vehicle-rent
 ```
 
-# 2. Install Dependencies
+## 2. Install Dependencies
 
 ```bash
 npm install
 ```
 
-# 3. Environment Configuration
+## 3. Environment Configuration
 
 Create a `.env` file in the root directory:
 
@@ -82,7 +80,7 @@ PORT=your_port
 JWT_SECRET=your_jwt_secret_key
 ```
 
-# 4. Run the Application
+## 4. Run the Application
 
 **Development Mode:**
 
@@ -92,13 +90,13 @@ npm run dev
 
 The server will start at `http://localhost:${PORT}`
 
-## GitHub Repo : [https://github.com/mozammal01/vehicle-rent](https://github.com/mozammal01/vehicle-rent)
+# GitHub Repo : [https://github.com/mozammal01/vehicle-rent](https://github.com/mozammal01/vehicle-rent)
 
 # Live URL : [https://vehicle-rent-seven.vercel.app/](https://vehicle-rent-seven.vercel.app/)
 
 ---
 
-## 👤 Author
+# 👤 Author
 
 **Mozammal**
 
