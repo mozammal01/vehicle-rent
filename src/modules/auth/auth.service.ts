@@ -4,6 +4,11 @@ import jwt from "jsonwebtoken";
 import config from "../../config";
 
 const signupUser = async (name: string, role: string, email: string, password: string, age: number, phone: string, address: string) => {
+  
+  if (!password || password.length < 6) {
+    throw new Error("Password must be at least 6 characters long");
+  }
+
   const hashedPassword = await bcrypt.hash(password, 10);
   const result = await pool.query(
     `INSERT INTO users(name, role, email, password, age, phone, address) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
@@ -17,7 +22,7 @@ const signupUser = async (name: string, role: string, email: string, password: s
     phone: result.rows[0].phone,
     role: result.rows[0].role,
   };
-  
+
   return data;
 };
 

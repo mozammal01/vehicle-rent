@@ -14,18 +14,21 @@ const getUser = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: err.message,
-      datails: err,
+      details: err,
     });
   }
 };
 
 const updateUser = async (req: Request, res: Response) => {
-  const { name, email, age, phone, address } = req.body;
+  const { name,  age, phone, address} = req.body;
+  const  updatedEmail = req.body.email;
+  const  updatedRole = req.body.role;
+  const { role, email } = (req as any).user;
   try {
-    const result = await userServices.updateUser(name, email, age, phone, address, req.params.id!);
+    const result = await userServices.updateUser(name, email, updatedEmail, updatedRole, age, phone, role, address, req.params.id!);
 
-    if (result.rows.length === 0) {
-      res.status(404).json({
+    if (!result) {
+      res.status(404).json({  
         success: false,
         message: "User not found",
       });
@@ -33,7 +36,7 @@ const updateUser = async (req: Request, res: Response) => {
       res.status(200).json({
         success: true,
         message: "User updated successfully",
-        data: result.rows[0],
+        data: result,
       });
     }
   } catch (err: any) {
