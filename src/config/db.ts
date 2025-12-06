@@ -18,10 +18,8 @@ const initDb = async () => {
         email VARCHAR(150) NOT NULL UNIQUE CHECK (email = LOWER(email)),
         password TEXT NOT NULL CHECK (LENGTH(password) >= 6),
         age INT,
-        phone INT,
-        address TEXT,
-        created_at TIMESTAMP DEFAULT NOW(),
-        updated_at TIMESTAMP DEFAULT NOW()
+        phone VARCHAR(100) NOT NULL,
+        address TEXT
       )
     `);
 

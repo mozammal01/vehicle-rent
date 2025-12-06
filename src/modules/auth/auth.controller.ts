@@ -7,8 +7,8 @@ const signupUser = async (req: Request, res: Response) => {
     const result = await authServices.signupUser(name, role, email, password, age, phone, address);
     res.status(201).json({
       success: true,
-      message: "User created successfully",
-      data: result.rows[0],
+      message: "User registered successfully",
+      data: result,
     });
   } catch (err: any) {
     res.status(500).json({
@@ -23,10 +23,9 @@ const loginUser = async (req: Request, res: Response) => {
 
   try {
     const result = await authServices.loginUser(email, password);
-    // console.log(result.rows[0]);
     res.status(200).json({
       success: true,
-      message: "Login successful",
+      message: "User logged in successfully",
       data: result,
     });
   } catch (err: any) {
