@@ -14,6 +14,7 @@ const signupUser = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: err.message,
+      details: err,
     });
   }
 };
@@ -32,6 +33,7 @@ const loginUser = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: err.message,
+      details: err,
     });
   }
 };

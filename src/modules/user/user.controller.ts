@@ -43,6 +43,7 @@ const updateUser = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: err.message,
+      details: err,
     });
   }
 };
@@ -66,6 +67,7 @@ const deleteUser = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: err.message,
+      details: err,
     });
   }
 };

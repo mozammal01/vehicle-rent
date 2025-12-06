@@ -126,8 +126,8 @@ const autoReturnExpiredBookings = async () => {
       await pool.query(`UPDATE vehicles SET availability_status = 'available' WHERE id = $1`, [booking.vehicle_id]);
     }
     return { updated: expiredBookings.rows.length };
-  } catch (error) {
-    return { updated: 0 };
+  } catch (error: any) {
+    return { updated: 0};
   }
 };
 

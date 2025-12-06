@@ -43,8 +43,8 @@ const initDb = async () => {
         status VARCHAR(20) NOT NULL CHECK (status IN ('active', 'cancelled', 'returned'))
       )
     `);
-  } catch (error) {
-    throw new Error("DB INIT ERROR");
+  } catch (error: any) {
+    throw new Error("DB INIT ERROR: " + error.message);
   }
 };
 

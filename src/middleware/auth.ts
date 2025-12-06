@@ -35,6 +35,7 @@ const auth = (...roles: string[]) => {
       res.status(500).json({
         success: false,
         message: err.message,
+        details: err,
       });
     }
   };

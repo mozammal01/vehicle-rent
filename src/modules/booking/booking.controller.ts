@@ -11,10 +11,10 @@ const createBooking = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (err: any) {
-    console.log(err);
     res.status(500).json({
       success: false,
       message: err.message,
+      details: err,
     });
   }
 };
@@ -34,6 +34,7 @@ const getBooking = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: err.message,
+      details: err,
     });
   }
 };
@@ -69,6 +70,7 @@ const updateBooking = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: err.message,
+      details: err,
     });
   }
 };
