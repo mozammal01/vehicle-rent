@@ -7,7 +7,7 @@ const router = Router();
 router.post("/", auth("admin"), vehicleController.createVehicle);
 
 router.get("/",  vehicleController.getVehicle);
-router.get("/:id", auth("admin"),  vehicleController.getSingleVehicle);
+router.get("/:id", vehicleController.getSingleVehicle);
 
 
 router.put("/:id", auth("admin"), vehicleController.updateVehicle);

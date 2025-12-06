@@ -48,7 +48,7 @@ const getSingleVehicle = async (req: Request, res: Response) => {
     } else {
       res.status(200).json({
         success: true,
-        message: "Vehicle fetched successfully",
+        message: "Vehicle retrieved successfully",
         data: result.rows[0],
       });
     }
@@ -99,8 +99,7 @@ const deleteVehicle = async (req: Request, res: Response) => {
     } else {
       res.status(200).json({
         success: true,
-        message: "Vehicle deleted successfully",
-        data: result.rows,
+        message: "Vehicle deleted successfully"
       });
     }
   } catch (err: any) {
