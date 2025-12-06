@@ -4,7 +4,7 @@ import { bookingServices } from "./booking.service";
 const createBooking = async (req: Request, res: Response) => {
   try {
     const result = await bookingServices.createBooking(req.body);
-    
+
     res.status(201).json({
       success: true,
       message: "Booking created successfully",
@@ -21,12 +21,14 @@ const createBooking = async (req: Request, res: Response) => {
 
 const getBooking = async (req: Request, res: Response) => {
   try {
-    const result = await bookingServices.getBooking();
+    const userRole = (req as any).user?.role;
+    const userEmail = (req as any).user?.email;
+    const result = await bookingServices.getBooking(userRole, userEmail);
 
     res.status(200).json({
-      success: true,
-      message: "Bookings retrieved successfully",
-      data: result.rows,
+      success: result.success,
+      message: result.message,
+      data: result.data,
     });
   } catch (err: any) {
     res.status(500).json({
@@ -37,21 +39,30 @@ const getBooking = async (req: Request, res: Response) => {
 };
 
 const updateBooking = async (req: Request, res: Response) => {
-  // console.log(req.params.id);
-  const { customer_id, vehicle_id, rent_start_date, rent_end_date, total_price, status } = req.body;
-  try {
-    const result = await bookingServices.updateBooking(customer_id, vehicle_id, rent_start_date, rent_end_date, total_price, status, req.params.id!);
+  const { status } = req.body;
+  const {role, email} = (req as any).user;
 
-    if (result.rows.length === 0) {
+  try {
+    const result = await bookingServices.updateBooking(status, req.params.id as string, role, email);
+
+    if (!result) {
       res.status(404).json({
         success: false,
         message: "Booking not found",
       });
     } else {
+      // Determine appropriate message based on status
+      let message = "Booking updated successfully";
+      if (status === "returned") {
+        message = "Booking marked as returned. Vehicle is now available";
+      } else if (status === "cancelled") {
+        message = "Booking cancelled successfully. Vehicle is now available";
+      }
+
       res.status(200).json({
         success: true,
-        message: "Booking updated successfully",
-        data: result.rows[0],
+        message: message,
+        data: result,
       });
     }
   } catch (err: any) {
@@ -61,7 +72,6 @@ const updateBooking = async (req: Request, res: Response) => {
     });
   }
 };
-
 
 export const bookingController = {
   createBooking,
