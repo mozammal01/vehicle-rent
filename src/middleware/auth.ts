@@ -1,10 +1,7 @@
-// higher order function  return korbe function k
-
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import config from "../config";
 
-// roles = ["admin", "customer"]
 const auth = (...roles: string[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -23,7 +20,6 @@ const auth = (...roles: string[]) => {
       console.log({ decoded });
       (req as any).user = decoded;
 
-      //["admin"]
       if (roles.length && !roles.includes(decoded.role as string)) {
         return res.status(500).json({
           error: "unauthorized!!!",

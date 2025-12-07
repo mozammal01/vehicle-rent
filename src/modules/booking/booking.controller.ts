@@ -52,7 +52,6 @@ const updateBooking = async (req: Request, res: Response) => {
         message: "Booking not found",
       });
     } else {
-      // Determine appropriate message based on status
       let message = "Booking updated successfully";
       if (status === "returned") {
         message = "Booking marked as returned. Vehicle is now available";

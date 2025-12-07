@@ -39,7 +39,6 @@ const updateVehicle = async (
 };
 
 const deleteVehicle = async (id: string) => {
-  // Check if vehicle has any active bookings
   const activeBookings = await pool.query(`SELECT id FROM bookings WHERE vehicle_id = $1 AND status = 'active'`, [id]);
 
   if (activeBookings.rows.length > 0) {

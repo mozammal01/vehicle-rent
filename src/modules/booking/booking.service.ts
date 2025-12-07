@@ -1,9 +1,9 @@
 import { pool } from "../../config/db";
 
 const createBooking = async (payload: Record<string, unknown>) => {
-  const { customer_id, vehicle_id, rent_start_date, rent_end_date } = payload;
+  const { customer_id, vehicle_id, rent_start_date, rent_end_date, status } = payload;
 
-  let tempStatus = "active";
+  let newStatus = status || "active";
 
   const vehicleInfo = await pool.query(`SELECT * FROM vehicles WHERE id = $1`, [vehicle_id]);
   if (vehicleInfo.rows.length === 0) {
@@ -28,7 +28,7 @@ const createBooking = async (payload: Record<string, unknown>) => {
 
   const result = await pool.query(
     `INSERT INTO bookings(customer_id, vehicle_id, rent_start_date, rent_end_date, total_price, status) VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
-    [customer_id, vehicle_id, rent_start_date, rent_end_date, total_price, tempStatus]
+    [customer_id, vehicle_id, rent_start_date, rent_end_date, total_price, newStatus]
   );
 
   await pool.query(`UPDATE vehicles SET availability_status='booked' WHERE id=$1`, [vehicle_id]);
@@ -41,7 +41,6 @@ const createBooking = async (payload: Record<string, unknown>) => {
 };
 
 const getBooking = async (role: string, email?: string) => {
-  await autoReturnExpiredBookings();
 
   let query = `
     SELECT 
@@ -113,23 +112,7 @@ const getBooking = async (role: string, email?: string) => {
   };
 };
 
-const autoReturnExpiredBookings = async () => {
-  try {
-    const expiredBookings = await pool.query(`SELECT id, vehicle_id FROM bookings WHERE status = 'active' AND rent_end_date < NOW()`);
 
-    if (expiredBookings.rows.length === 0) {
-      return { updated: 0 };
-    }
-
-    for (const booking of expiredBookings.rows) {
-      await pool.query(`UPDATE bookings SET status = 'returned' WHERE id = $1`, [booking.id]);
-      await pool.query(`UPDATE vehicles SET availability_status = 'available' WHERE id = $1`, [booking.vehicle_id]);
-    }
-    return { updated: expiredBookings.rows.length };
-  } catch (error: any) {
-    return { updated: 0};
-  }
-};
 
 const updateBooking = async (status: string, id: string, role: string, email: string) => {
   const bookingResult = await pool.query(`SELECT * FROM bookings WHERE id = $1`, [id]);
@@ -191,7 +174,6 @@ const updateBooking = async (status: string, id: string, role: string, email: st
     }
   }
 
-  // Default update
   const result = await pool.query(`UPDATE bookings SET status=$1 WHERE id=$2 RETURNING *`, [status, id]);
 
   return result.rows[0];
